@@ -1,14 +1,26 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
+import { AuthPorvider } from '../../Context/AuthContext';
 import './Header.css'
-import logo from './image/logo.jpg'
+import logo from './image/logo.jpg';
+import { FaUser } from 'react-icons/fa';
+import { Image } from 'react-bootstrap';
+
 const Header = () => {
     const [darkMode, setDarkMode] = useState(false);
+    const { user, logOut } = useContext(AuthPorvider);
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => {
+                console.error('error', error);
+            })
+    }
     return (
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar className='align-items-center justify-content-center' collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
                 <Navbar.Brand href="#home">
                     <img
@@ -26,8 +38,25 @@ const Header = () => {
                         <Link to='/courses'>Courses</Link>
                         <Link to='/faq'>FAQ</Link>
                         <Link to='/blog'>Blog</Link>
-                        <Link to='/login'>Login</Link>
-                        <Link to='/register'>Register</Link>
+                        {user?.email ?
+                        <Link><button onClick={handleLogOut} type="button" className="btn btn-primary btn-sm h-50">LogOut</button></Link>
+                        :
+                        <>
+                        <> <Link to='/login'>Login</Link> </>
+                        <> <Link to='/register'>Register</Link> </>
+                        </>
+                        }
+                        <Nav.Link>
+                        {user?.displayName}
+                        </Nav.Link>
+                        <Nav.Link>
+                            {user?.photoURL ?
+                            <Image style={{height:'40px'}} roundedCircle src ={user.photoURL}
+                            ></Image>
+                            :
+                            <FaUser></FaUser>
+                            }
+                        </Nav.Link>
                     </Nav>
                     <Nav>
                         <div className={darkMode ? "dark-mode" : "light-mode"}>

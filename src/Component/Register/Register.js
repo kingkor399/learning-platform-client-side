@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import toast from 'react-hot-toast';
 import { AuthPorvider } from '../../Context/AuthContext';
 import { FaGoogle, FaGithub } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 const Register = () => {
     const { createUser,GoogleProvider,updateUserProfile,emailVerification } = useContext(AuthPorvider);
@@ -67,7 +68,7 @@ const Register = () => {
     }
 
     return (
-        <div className='w-25 mx-auto border border-info mt-2 p-2 rounded'>
+        <div className='w-25 mx-auto border border-info mt-2 p-2 rounded mb-5'>
             <h3 className='text-warning'>Please Register!!</h3>
             <Form onSubmit={handleRegister}>
                 <Form.Group className="mb-3">
@@ -95,9 +96,10 @@ const Register = () => {
                 <Button variant="success" type="submit">
                     Submit
                 </Button>
+                <p>Already have an account? <Link to='/login'>Login Now</Link></p>
             </Form>
             <p>or use one of these options</p>
-            <Button onClick={GoogleSignIn} className='mb-2' variant="outline-warning"> <FaGoogle></FaGoogle> Login with Google</Button>
+            <Button onClick={GoogleSignIn} className='mb-2' variant="outline-info"> <FaGoogle></FaGoogle> Login with Google</Button>
             <Button variant="outline-dark"> <FaGithub></FaGithub> Login with Github</Button>
         </div>
     );

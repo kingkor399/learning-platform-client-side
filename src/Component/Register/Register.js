@@ -68,7 +68,7 @@ const Register = () => {
     }
 
     return (
-        <div className='w-25 mx-auto border border-info mt-2 p-2 rounded mb-5'>
+        <div className='w-50 mx-auto border border-info mt-2 p-2 rounded mb-5'>
             <h3 className='text-warning'>Please Register!!</h3>
             <Form onSubmit={handleRegister}>
                 <Form.Group className="mb-3">

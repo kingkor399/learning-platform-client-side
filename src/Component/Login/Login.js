@@ -37,7 +37,7 @@ const Login = () => {
             })
     }
     return (
-        <div className='w-25 mx-auto border border-info mt-2 p-2 rounded'>
+        <div className='w-50 mx-auto border border-info mt-2 p-2 rounded'>
             <h3 className='text-warning'>Please Login!!</h3>
             <Form onSubmit={handleLogin}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">

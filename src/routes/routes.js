@@ -33,11 +33,11 @@ export const routes = createBrowserRouter([
         },
         {path: '/category/:id',
         element: <CourseCategory></CourseCategory>,
-        loader: ({params}) => fetch(`http://localhost:5000/category/${params.id}`)
+        loader: ({params}) => fetch(`https://b610-learning-platform-server-iota.vercel.app/category/${params.id}`)
         },
         {path: '/courses/:id',
         element: <CourseDetails></CourseDetails>,
-        loader: ({params}) => fetch(`http://localhost:5000/course/${params.id}`)
+        loader: ({params}) => fetch(`https://b610-learning-platform-server-iota.vercel.app/course/${params.id}`)
         }
     ]
     }

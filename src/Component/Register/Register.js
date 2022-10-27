@@ -3,9 +3,10 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import toast from 'react-hot-toast';
 import { AuthPorvider } from '../../Context/AuthContext';
+import { FaGoogle, FaGithub } from "react-icons/fa";
 
 const Register = () => {
-    const { createUser,updateUserProfile,emailVerification } = useContext(AuthPorvider);
+    const { createUser,GoogleProvider,updateUserProfile,emailVerification } = useContext(AuthPorvider);
     const [error, setError] = useState('');
     const handleRegister = (event) => {
         event.preventDefault()
@@ -34,6 +35,16 @@ const Register = () => {
                 console.error('error', error);
                 setError(error.message);
             })
+    }
+    const GoogleSignIn = () =>{
+        GoogleProvider()
+        .then(result =>{
+            const user = result.user;
+            console.log(user)
+        })
+        .then(error =>{
+            console.error('error',error)
+        })
     }
     const handleUpdateProfile = (name,photoURL) =>{
         const profile = {
@@ -85,6 +96,9 @@ const Register = () => {
                     Submit
                 </Button>
             </Form>
+            <p>or use one of these options</p>
+            <Button onClick={GoogleSignIn} className='mb-2' variant="outline-warning"> <FaGoogle></FaGoogle> Login with Google</Button>
+            <Button variant="outline-dark"> <FaGithub></FaGithub> Login with Github</Button>
         </div>
     );
 };

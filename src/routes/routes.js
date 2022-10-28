@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Blog from "../Component/Blog/Blog";
+import CheckOut from "../Component/CheckOut";
 import CourseDetails from "../Component/CourseDetails";
 import Courses from "../Component/Courses/Courses";
 import ErrorPage from "../Component/ErrorPage/ErrorPage";
@@ -8,6 +9,7 @@ import Login from "../Component/Login/Login";
 import Main from "../Component/Main/Main";
 import Register from "../Component/Register/Register";
 import CourseCategory from "../CourseCategory/CourseCategory";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const routes = createBrowserRouter([
     {path: '/', element: <Main></Main>,
@@ -37,6 +39,10 @@ export const routes = createBrowserRouter([
         },
         {path: '/courses/:id',
         element: <CourseDetails></CourseDetails>,
+        loader: ({params}) => fetch(`https://b610-learning-platform-server-iota.vercel.app/course/${params.id}`)
+        },
+        {path: '/course-buy/:id',
+        element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>,
         loader: ({params}) => fetch(`https://b610-learning-platform-server-iota.vercel.app/course/${params.id}`)
         }
     ]
